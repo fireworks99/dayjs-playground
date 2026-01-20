@@ -19,6 +19,13 @@
           </el-select>
         </el-form-item>
 
+        <el-form-item label="间隔" v-show="props.useful.includes('interval')">
+          <el-select v-model="props.input.interval">
+            <el-option v-for="item in intervalArr" :key="item.value" :label="item.value" 
+              :value="item.value" :disabled="item.disabled" />
+          </el-select>
+        </el-form-item>
+
         <el-form-item>
           <el-switch v-model="props.input.autoRun" />
           <span style="margin-left: 8px">自动执行</span>
@@ -30,26 +37,33 @@
 
 <script setup lang="ts">
 import type { FuncInput } from '@/composables/';
-import { reactive } from 'vue';
 
 const props = defineProps<{
   input: FuncInput,
   useful: Array<string>,
 }>()
 
-const formatArr = reactive(['YYYY-MM-DD HH:mm:ss', 'YYYY-MM-DD',
-  'YYYY/MM/DD', 'MM/DD/YYYY', 'DD/MM/YYYY'])
+const formatArr = ['YYYY-MM-DD HH:mm:ss', 'YYYY-MM-DD',
+  'YYYY/MM/DD', 'MM/DD/YYYY', 'DD/MM/YYYY']
 
-const periodArr = reactive([
+const strArr = [
   { value: 'year', disabled: false },
-  { value: 'quarter', disabled: true },
   { value: 'month', disabled: false },
   { value: 'week', disabled: false },
-  { value: 'isoWeek', disabled: true },
-  { value: 'date', disabled: false },
   { value: 'day', disabled: false },
   { value: 'hour', disabled: false },
   { value: 'minute', disabled: false },
   { value: 'second', disabled: false },
+]
+
+const periodArr = strArr.concat([
+  { value: 'date', disabled: false },
+  { value: 'quarter', disabled: true },
+  { value: 'isoWeek', disabled: true }
+])
+
+const intervalArr = strArr.concat([
+   { value: 'quarter', disabled: true },
+   { value: 'millisecond', disabled: false }
 ])
 </script>

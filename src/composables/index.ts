@@ -1,10 +1,11 @@
-import type { OpUnitType } from "dayjs"
+import type { ManipulateType, OpUnitType } from "dayjs"
 import type { Ref } from "vue"
 
 export interface FuncInput {
   date: Date
   format: string,
   period: OpUnitType,
+  interval: ManipulateType
   autoRun: boolean
 }
 
