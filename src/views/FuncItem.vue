@@ -1,13 +1,13 @@
 <template>
   <div class="demo_wrapper">
-    <div class="header">format</div>
+    <div class="header">{{ props.funcDemoReturn.title }}</div>
     <div class="content">
       <div class="left">
-        <InputPanel :state="state" />
+        <InputPanel :input="props.funcDemoReturn.input" :useful="props.funcDemoReturn.useful"/>
       </div>
       <div class="right">
-        <CodePanel :code="code" @run="execute" />
-        <ResultPanel :result="result" :error="error" />
+        <CodePanel :code="props.funcDemoReturn.code" @run="props.funcDemoReturn.execute" />
+        <ResultPanel :result="props.funcDemoReturn.result" :error="props.funcDemoReturn.error" />
       </div>
     </div>
   </div>
@@ -17,9 +17,17 @@
 import InputPanel from '@/components/InputPanel.vue';
 import CodePanel from '@/components/CodePanel.vue'
 import ResultPanel from '@/components/ResultPanel.vue'
-import { useFormatDemo } from '@/composables/useFormatDemo'
+import type { FuncDemoReturn } from '@/composables/';
+import { onMounted } from 'vue';
 
-const { state, code, result, error, execute } = useFormatDemo()
+const props = defineProps<{
+  funcDemoReturn: FuncDemoReturn
+}>()
+
+onMounted(() => {
+  // console.log('FuncItem Mounted:', props.funcDemoReturn);
+})
+
 </script>
 
 <style scoped lang="scss">
@@ -29,7 +37,7 @@ const { state, code, result, error, execute } = useFormatDemo()
     font-size: 20px;
     font-weight: bold;
     padding: 16px 0;
-    margin-bottom: 16px;
+    margin: 16px 0;
     box-shadow: var(--el-box-shadow-light);
   }
 

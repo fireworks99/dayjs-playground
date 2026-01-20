@@ -2,18 +2,25 @@
   <el-card header="Input" style="height: 100%; text-align: center;">
     <div class="flex_center" style="height: 100%;">
       <el-form>
-        <el-form-item label="时间">
-          <el-date-picker v-model="props.state.date" type="datetime" style="width: 100%;" />
+        <el-form-item label="时间" v-show="props.useful.includes('date')">
+          <el-date-picker v-model="props.input.date" type="datetime" style="width: 100%;" />
         </el-form-item>
 
-        <el-form-item label="格式">
-          <el-select v-model="props.state.format">
+        <el-form-item label="格式" v-show="props.useful.includes('format')">
+          <el-select v-model="props.input.format">
             <el-option v-for="str in formatArr" :key="str" :label="str" :value="str" />
           </el-select>
         </el-form-item>
 
+        <el-form-item label="周期" v-show="props.useful.includes('period')">
+          <el-select v-model="props.input.period">
+            <el-option v-for="item in periodArr" :key="item.value" :label="item.value" 
+              :value="item.value" :disabled="item.disabled" />
+          </el-select>
+        </el-form-item>
+
         <el-form-item>
-          <el-switch v-model="props.state.autoRun" />
+          <el-switch v-model="props.input.autoRun" />
           <span style="margin-left: 8px">自动执行</span>
         </el-form-item>
       </el-form>
@@ -22,13 +29,27 @@
 </template>
 
 <script setup lang="ts">
-import type { FormatState } from '@/composables/useFormatDemo';
+import type { FuncInput } from '@/composables/';
 import { reactive } from 'vue';
 
 const props = defineProps<{
-  state: FormatState
+  input: FuncInput,
+  useful: Array<string>,
 }>()
 
 const formatArr = reactive(['YYYY-MM-DD HH:mm:ss', 'YYYY-MM-DD',
   'YYYY/MM/DD', 'MM/DD/YYYY', 'DD/MM/YYYY'])
+
+const periodArr = reactive([
+  { value: 'year', disabled: false },
+  { value: 'quarter', disabled: true },
+  { value: 'month', disabled: false },
+  { value: 'week', disabled: false },
+  { value: 'isoWeek', disabled: true },
+  { value: 'date', disabled: false },
+  { value: 'day', disabled: false },
+  { value: 'hour', disabled: false },
+  { value: 'minute', disabled: false },
+  { value: 'second', disabled: false },
+])
 </script>

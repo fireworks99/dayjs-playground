@@ -1,41 +1,36 @@
 import { reactive, ref, computed, watch } from 'vue'
 import dayjs from 'dayjs'
+import type { FuncInput } from '../index'
 
-export interface FormatState {
-  date: Date
-  format: string
-  autoRun: boolean
-}
-
-export function generateFormatCode(state: FormatState): string {
+function generateFormatCode(input: FuncInput): string {
   let dateStr = null
   try {
-    dateStr = dayjs(state.date).format(state.format)
+    dateStr = dayjs(input.date).format(input.format)
   } catch (e) {}
 
-  return `dayjs('${dateStr}').format('${state.format}')`.trim()
+  return `dayjs('${dateStr}').format('${input.format}')`.trim()
 }
 
-
-export function useFormatDemo() {
-  const state = reactive<FormatState>({
+export default function useFuncDemo() {
+  const input = reactive<FuncInput>({
     date: new Date(),
     format: 'YYYY-MM-DD HH:mm:ss',
+    period: 'year',
     autoRun: true
   })
 
   const result = ref<string>('')
   const error = ref<string | null>(null)
 
-  const code = computed(() => generateFormatCode(state))
+  const code = computed(() => generateFormatCode(input))
 
   function execute() {
     try {
-      const d = dayjs(state.date)
+      const d = dayjs(input.date)
       if (!d.isValid()) {
         throw new Error('Invalid Date')
       }
-      result.value = d.format(state.format)
+      result.value = d.format(input.format)
       error.value = null
     } catch (e: any) {
       result.value = ''
@@ -44,9 +39,9 @@ export function useFormatDemo() {
   }
 
   watch(
-    () => ({ ...state }),
+    () => ({ ...input }),
     () => {
-      if (state.autoRun) {
+      if (input.autoRun) {
         execute()
       }
     },
@@ -54,7 +49,9 @@ export function useFormatDemo() {
   )
 
   return {
-    state,
+    title: 'format',
+    useful: ['date', 'format'],
+    input,
     code,
     result,
     error,

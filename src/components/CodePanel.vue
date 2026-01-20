@@ -1,6 +1,6 @@
 <template>
   <el-card header="Code" style="text-align: center;">
-    <pre class="code" style="text-align: left;"><code>{{ code }}</code></pre>
+    <pre class="code" style="text-align: left;"><code>{{ props.code }}</code></pre>
 
     <div class="actions">
       <el-button size="small" @click="copy">复制</el-button>
@@ -13,13 +13,14 @@
 
 <script setup lang="ts">
 import { ElMessage } from 'element-plus'
+import type { Ref } from 'vue';
 
 const props = defineProps<{
-  code: string
+  code: Ref<string>
 }>()
 
 function copy() {
-  navigator.clipboard.writeText(props.code)
+  navigator.clipboard.writeText(props.code.value)
   ElMessage.success('代码已复制')
 }
 </script>
