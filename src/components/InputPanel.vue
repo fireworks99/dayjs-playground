@@ -8,9 +8,7 @@
 
         <el-form-item label="格式">
           <el-select v-model="props.state.format">
-            <el-option label="YYYY-MM-DD" value="YYYY-MM-DD" />
-            <el-option label="YYYY-MM-DD HH:mm:ss" value="YYYY-MM-DD HH:mm:ss" />
-            <el-option label="YYYY/MM/DD" value="YYYY/MM/DD" />
+            <el-option v-for="str in formatArr" :key="str" :label="str" :value="str" />
           </el-select>
         </el-form-item>
 
@@ -25,8 +23,12 @@
 
 <script setup lang="ts">
 import type { FormatState } from '@/composables/useFormatDemo';
+import { reactive } from 'vue';
 
 const props = defineProps<{
   state: FormatState
 }>()
+
+const formatArr = reactive(['YYYY-MM-DD HH:mm:ss', 'YYYY-MM-DD',
+  'YYYY/MM/DD', 'MM/DD/YYYY', 'DD/MM/YYYY'])
 </script>

@@ -8,7 +8,10 @@ export interface FormatState {
 }
 
 export function generateFormatCode(state: FormatState): string {
-  const dateStr = state.date?.toISOString() || state.date
+  let dateStr = null
+  try {
+    dateStr = dayjs(state.date).format(state.format)
+  } catch (e) {}
 
   return `dayjs('${dateStr}').format('${state.format}')`.trim()
 }
