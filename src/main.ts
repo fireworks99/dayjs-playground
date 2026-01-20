@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import { pinia } from './store'
+import { createPinia } from 'pinia'
 import '@/assets/styles/index.scss'
 
 import ElementPlus from 'element-plus'
@@ -9,6 +9,6 @@ import 'element-plus/dist/index.css'
 
 createApp(App)
   .use(router)
-  .use(pinia)
+  .use(createPinia())
   .use(ElementPlus)
   .mount('#app')

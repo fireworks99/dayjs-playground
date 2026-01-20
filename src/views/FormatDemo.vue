@@ -50,6 +50,14 @@ const { state, code, result, error, execute } = useFormatDemo()
     }
   }
 }
+
+#app.mobile {
+  .demo_wrapper {
+    .content {
+      flex-direction: column;
+    }
+  }
+}
 </style>
 
 <style lang="scss">
