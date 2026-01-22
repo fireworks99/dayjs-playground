@@ -3,9 +3,11 @@ import type { Ref } from "vue"
 
 export interface FuncInput {
   date: Date
-  format: string,
-  period: OpUnitType,
+  date2: Date
+  format: string
+  period: OpUnitType
   interval: ManipulateType
+  num: number
   autoRun: boolean
 }
 

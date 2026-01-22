@@ -6,6 +6,10 @@
           <el-date-picker v-model="props.input.date" type="datetime" style="width: 100%;" />
         </el-form-item>
 
+        <el-form-item label="时间" v-show="props.useful.includes('date2')">
+          <el-date-picker v-model="props.input.date2" type="datetime" style="width: 100%;" />
+        </el-form-item>
+
         <el-form-item label="格式" v-show="props.useful.includes('format')">
           <el-select v-model="props.input.format">
             <el-option v-for="str in formatArr" :key="str" :label="str" :value="str" />
@@ -24,6 +28,10 @@
             <el-option v-for="item in intervalArr" :key="item.value" :label="item.value" 
               :value="item.value" :disabled="item.disabled" />
           </el-select>
+        </el-form-item>
+
+        <el-form-item label="数值" v-show="props.useful.includes('num')">
+          <el-input-number v-model="props.input.num" style="width: 100%;"/>
         </el-form-item>
 
         <el-form-item>

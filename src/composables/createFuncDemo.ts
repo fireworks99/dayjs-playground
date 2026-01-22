@@ -13,9 +13,11 @@ export function createFuncDemo(options: CreateFuncDemoOptions): () => FuncDemoRe
   return function useFuncDemo(): FuncDemoReturn {
     const input = reactive<FuncInput>({
       date: new Date(),
+      date2: new Date(),
       format: 'YYYY-MM-DD HH:mm:ss',
       period: 'year',
       interval: 'year',
+      num: 1,
       autoRun: true
     })
 
