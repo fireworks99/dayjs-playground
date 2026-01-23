@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <router-view />
-  </div>
+  <router-view />
 </template>
 
 <script setup lang="ts">
@@ -21,7 +19,7 @@ watch(
 )
 
 const resizeHandler = () => {
-  layoutStore.setIsMobile(window.innerWidth < 820);
+  layoutStore.setIsMobile(window.innerWidth < 1080);
 }
 
 onMounted(() => {

@@ -1,6 +1,12 @@
 @use './variables.scss';
 @use './element-plus.scss';
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   
   .flex_center {

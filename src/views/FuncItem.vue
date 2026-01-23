@@ -1,6 +1,6 @@
 <template>
   <div class="demo_wrapper">
-    <div class="header">{{ props.funcDemoReturn.title }}</div>
+    <div class="header" :id="props.funcDemoReturn.title">{{ props.funcDemoReturn.title }}</div>
     <div class="content">
       <div class="left">
         <InputPanel :input="props.funcDemoReturn.input" :useful="props.funcDemoReturn.useful"/>
@@ -47,7 +47,7 @@ onMounted(() => {
 
     .left {
       flex: 1;
-      min-width: 280px;
+      min-width: 0;
     }
 
     .right {
@@ -55,6 +55,10 @@ onMounted(() => {
       display: flex;
       flex-direction: column;
       gap: 16px;
+
+      & > div:first-child {
+        flex: 1;
+      }
     }
   }
 }

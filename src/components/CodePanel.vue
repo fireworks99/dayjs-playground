@@ -33,4 +33,8 @@ function copy() {
   border-radius: 6px;
   overflow-x: auto;
 }
+
+.actions {
+  margin-top: 8px;
+}
 </style>
